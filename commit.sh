@@ -11,6 +11,9 @@ git add .
 git commit -m "$COMMIT_MESSAGE"
 git push
 if [ $? -eq 0 ]; then
+  echo "   "
+  echo "   "
+  echo "   "
   echo "Changes pushed successfully!"
 else
   echo "Failed to push changes."
