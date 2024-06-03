@@ -4,6 +4,7 @@ title:  "Network Design: E02 (VLANs / Virtual Networks)"
 categories: jekyll update
 tags: network-design notes
 ---
+TODO: ADD IMAGES
 
 Hello everyone, welcome back to this tutorial on building a professional network using Linux. In the last video, I explained the fundamentals of networking. In this video, I want to expand on that by talking about virtual networks, specifically VLANs (Virtual Local Area Networks).
 
