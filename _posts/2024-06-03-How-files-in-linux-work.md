@@ -7,7 +7,8 @@ tags: linux notes
 
 ## How files in Linux work
 
-One of the basic concepts we learn in computing is how to work with files and organize them in directories. The typical usecase is storing some data in a file and later reading it. However, files and directories can be a much more powerful concept that goes beyond just storing some bytes on a local storage and retrieving them. In this article, we will explore files as a computing abstraction, how Linux handles access to files in the kernel, what filesystems are and even how we can write custom filesystems with FUSE.
+Understanding how to work with files and arrange them in directories is one of the fundamental computing principles we are taught. Reading data that has been stored in a file later on is the usual use case. But the idea of files and directories can be considerably more useful than merely saving and retrieving a few bytes from a local storage device. This article will discuss filesystems, how Linux manages file access in the kernel, files as a computing abstraction, and even how to create custom filesystems using FUSE.
+
 
 ### Table of Contents
   
@@ -25,16 +26,19 @@ One of the basic concepts we learn in computing is how to work with files and or
 
 ### File hierarchy in Linux
 
-Files in Linux are organized as a tree-like hierarchy. The tree begins with the root path ’/’ and files and directories are then organized underneath it. Below is an example of a piece of the file hierarchy on a Linux system.
-Sample file hierarchy
+Linux files are arranged in a hierarchy that resembles a tree. Files and folders are arranged in a tree structure starting with the root directory '/'. An illustration of a section of a Linux system's file hierarchy may be found below.
+An example of a file hierarchy:
 
-In the rest of this article, we will focus mostly on files and disregard directories for the most part. Therefore, the question is, what happens on the system when file contents are read or written?
+![Alt text](/public/media/file-hierarchy.png)
+
+
+For the most part, we will ignore directories in favour of files in the remaining sections of this blog. So, the question is: What happens on the system when someone reads or writes data from a file?
 
 The operating system kernel is in charge of servicing requests to the filesystem. Hence a system call is needed to make such a request to the kernel. How system calls work is outside the scope of this article, but whenever you use a library to interact with a file, under the hood, a CPU instruction will be invoked which will hand over a request to the kernel asking it to process a filesystem request. In a simplified view, your application at this point waits for the kernel to come back with the response; after the response is obtained, the application resumes with the execution.
 
 The requests roughly come in the form such as the following:
 
-    For the file at /home/johnsmith/foo.txt, read 100 bytes at offset 0x102.
+    For the file at /home/utkarsh/foo.txt, read 100 bytes at offset 0x102.
 
 ### Purpose of the filesystems
 
@@ -53,30 +57,28 @@ And so a filesystem can be viewed as nothing more than a set of functions that g
 Some of the filesystems you will commonly hear about in the Linux world are: **ext2**, **ext4**, **SquashFS**, **ReiserFS** and so on (there are many out there).
 
 ### Example of mounted filesystems
-Sample file hierarchy
-
 The example above is a piece of the filesystem hierarchy on a sample Linux system. There are **4 different mountpoints**:
 
 - **/**: root is mounted using the filesystem **ext4** backed by device **/dev/sda1**
 - **/media/usb-1**: USB stick 1 is mounted using the filesystem **ext4** backed by device **/dev/sdb1**
 - **/media/usb-2**: USB stick 1 is mounted using the filesystem **ext2** backed by device **/dev/sdc1**
-- **/home/john/fun**: filesystem **foofs**
+- **/home/utkarsh/fun**: filesystem **foofs**
 
-What does all this really mean? It means for a file operation, for example reading, 4 different things can happen, depending on the exact path of the file. How is it determined what happens? The mountpoint for the filesystem of the file in question must be found first. This is simply done by tracing parent directories of a file until the first mountpoint is reached.
+What is the true meaning of all this? This means that depending on the precise path of the file, four alternative outcomes are possible for a file operation, such as reading. How is what occurs decided upon? First, we need to locate the mountpoint for the filesystem of the relevant file. To accomplish this, just follow a file's parent directories until you reach the first mountpoint.
 
-For example, for the file **/home/john/work/Code.java**, we first check **/home/john/work**, then **/home/john**, then **/home** and finally **/**. Root is the lowest mountpoint under which the request filed resides. This means that the read operation is handled by the filesystem **ext4** backed by the block device **/dev/sda1**.
+For example, for the file **/home/utkarsh/work/Code.java**, we first check **/home/utkarsh/work**, then **/home/utkarsh**, then **/home** and finally **/**. Root is the lowest mountpoint under which the request filed resides. This means that the read operation is handled by the filesystem **ext4** backed by the block device **/dev/sda1**.
 
-Similarly, for the file at **/home/john/fun/Foo.txt**, the mountpoint is at **/home/john/fun** and that means the requests are handled by the filesystem **foofs**. Note that in this case, there is no block device backing this filesystem. What does it mean?
+Similarly, for the file at **/home/utkarsh/fun/Foo.txt**, the mountpoint is at **/home/utkarsh/fun** and that means the requests are handled by the filesystem **foofs**. Note that in this case, there is no block device backing this filesystem. What does it mean?
 
 ### Filesystems that store on block devices
 
-In the most commonly understood form, a filesystem presents some data as files, and these files are stored on a block device. Block devices are devices that provide random access to the data, arranged in blocks of certain size. Simply put, block devices are just huge arrays of bytes.
+A filesystem stores some data on a block device and exposes certain data as files in its most widely recognised form. Devices that offer arbitrary access to data organised into blocks of a specific size are known as block devices. Block devices are merely enormous arrays of bytes, to put it simply.
 
-How do filesystems then have this hierarchical representation of the files when in the back we’re just dealing with basically arrays of bytes?
+Since we're just working with arrays of bytes at the back, how do filesystems manage to have this hierarchical representation of the files?
 
 The answer is that the filesystems maintain some sort of a table in a special location (or multiple locations) on the disk where pointers to the individual files are kept. We can thus imagine an extremely simple filesystem in which we say we can have up to 1023 files. Each file can be no more than 1 MB. At the beginning of the block device, we store the table of file entries. In fact, to keep things simple, for each table entry we preallocate 1 KB for all the file-related metadata, and thus our filesystem table is 1023 x 1 KB in size, and for simplicity we can leave 1 KB of empty padding. The first 1 MB of the block device is reserved for the file metadata. Let’s further assume that we do not support directories in our filesystem: all the files are at the root of this filesystem. Therefore, the filesystem table can be very simple, it maps the filename to the file region, and we have 1023 regions since we assume we support up to 1023 files. A block device of 1 MB + 1023 x 1 MB = 1024 * 1 MB = 1 GB is needed for this set up.
 
-The way our filesystem services requests is simple: once a file name is provided, we scan through the filesystem table and identify which file region our file is stored in. We then treat that file region as simply a byte array (subarray of our block device) and service the request accordingly. After all, the filesystem requests see the file as a continuous byte array, so the implementation is easy: operate on the chunks of this array at the given offset.
+Our filesystem services requests are sent in a straightforward manner: after receiving a file name, we look up the filename in the filesystem table to determine which file area the file is stored in. After that, we handle the request as though it were a simple byte array (a subarray of our block device) and handle the file area appropriately. Since the file is perceived by the filesystem requests as a continuous byte array, the implementation is straightforward: just work with the array's chunks at the specified offset.
 
 __________________________________________________________________________
 
@@ -94,7 +96,7 @@ __________________________________________________________________________
 
 __________________________________________________________________________
 
-So for example, if something needs to be done on bar.txt, the filesystem driver will start reading the filesystem table at the beginning of the block device (disk), find that it’s the 2nd entry in the table and will thus know that the file is in the address range 0x0020 0000 - 0x002F FFFF on the block device and will thus translate all operations over that file to the operations over bytes in that address range.
+The filesystem driver will, for instance, begin reading the filesystem table at the beginning of the block device (disc) if an action is required on bar.txt. Upon discovering that it is the second entry in the table, it will know that the file is located in the address range 0x0020 0000 - 0x002F FFFF on the block device and will convert all operations performed on that file to operations performed on the bytes in that address range.
 
 ### Do filesystems have to be backed by a block device?
 
@@ -126,7 +128,7 @@ Writing kernel drivers, however, is outside the scope of this article.
 
 ### Filesystems as an API
 
-With all this in mind, we can now stop thinking of filesystems as means to store bytes on a device and later retrieve them, and instead think of filesystems as an API. A parallel between object oriented programming and filesystems can be that Linux provides an interface called filesystem, and the concrete filesystems are implementations of that interface.
+With all of this in mind, we can now consider filesystems to be an API rather than just a way to store and retrieve bytes from a device. Filesystems and object-oriented programming may be similar in that Linux has an interface named filesystem, which concrete filesystems are just implementations of.
 
 What’s the benefit of this abstraction? **Basically all the applications available on the machine know how to consume this interface!** For example, if your filesystem is backed by some cloud storage, the applications that operate on these files do not need to know anything about it necessarily. You can still open the photos with your favorite photo viewer, you can still read PDFs with your PDF reader, you can use rsync to backup your data in the cloud, etc. Granted, the performance may be slower, depending on the network connection and the quality of implementation, so as long as the application does not crash because the file operations are simply slow, the applications will be compatible with your filesystem.
 
@@ -134,13 +136,12 @@ What’s the benefit of this abstraction? **Basically all the applications avail
 
 FUSE (Filesystem in Userspace) is a Linux technology that enables us to write filesystems with code in user space, meaning code that can do anything and is not restricted by kernel APIs, like it is in the case of kernel modules or drivers. FUSE filesystems could be written in something like Python and use any Python libraries, e.g. libraries for accessing AWS S3 storage.
 
-The model for FUSE is simple: a FUSE server process is started in user space, and it exposes functionality for writing, reading, etc, much like the kernel filesystems. The difference is that VFS cannot directly invoke that functionality, but rather it goes through the FUSE kernel module which will cross the kernel/user space border to communicate with the FUSE server and then bring back the response from the server.
+The FUSE concept is straightforward: it starts a FUSE server process in user space and offers writing, reading, and other functions, just like kernel filesystems do. The distinction lies in the fact that VFS is unable to access that functionality directly; instead, it uses the FUSE kernel module, which traverses the boundary between kernel and user space to interact with the FUSE server and then returns the server's answer.
 
-Therefore, the programming model is more or like the same, but there is a performance penalty for crossing the kernel/user space border. It is now obvious what the tradeoff is — getting the unlimited flexibility of user space code, at the price of slower execution and memory usage.
-Sample file hierarchy
+As a result, the programming architecture remains mostly same, but navigating across the kernel/user space boundary will cost you in terms of performance. The trade-off is now clear: obtaining user space code's infinite flexibility comes at the expense of slower execution and higher memory consumption.
 
 ### Conclusion
 
-This is an older text I’ve had sitting for a while, but I hope it’s useful and sparks some imagination when it comes to the filesystems. The main purpose is to shift the mindset towards thinking of filesystems as APIs, rather than byte storage.
+The main purpose is to shift the mindset towards thinking of filesystems as APIs, rather than byte storage.
 
 I hope you like it! Please consider following on [Twitter/X](https://x.com/gilfoyle_v2) and [LinkedIn](https://www.linkedin.com/in/utkarsh-maurya-connect/) to stay updated.
