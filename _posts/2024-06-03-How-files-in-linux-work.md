@@ -2,7 +2,7 @@
 layout: post
 title:  "How files in Linux work"
 categories: jekyll update
-tags: network-design notes
+tags: linux notes
 ---
 
 ## How files in Linux work
