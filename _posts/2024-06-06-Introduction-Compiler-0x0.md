@@ -2,7 +2,7 @@
 layout: post
 title:  "Part 0: Introduction-Compiler"
 categories: jekyll update
-tags: summer-holidays
+tags: compiler projects software-dev
 
 ---
 # Part 0: Introduction 
