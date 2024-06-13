@@ -6,7 +6,7 @@ tags: network-design notes
 ---
 TODO: ADD IMAGES
 
-Hello everyone, welcome back to this tutorial on building a professional network using Linux. In the last video, I explained the fundamentals of networking. In this video, I want to expand on that by talking about virtual networks, specifically VLANs (Virtual Local Area Networks).
+Hello everyone, welcome back to this tutorial on building a professional network using Linux. In the last blog, I explained the fundamentals of networking. In this blog, I want to expand on that by talking about virtual networks, specifically VLANs (Virtual Local Area Networks).
 
 When managing a large network with hundreds or thousands of machines, it's often necessary to control which machines can communicate with each other for security reasons. For example, you might not want every machine to be able to communicate with every other machine. This control helps to prevent security issues and reduce unnecessary broadcast traffic, which although less of a problem with modern fast networks, can still be optimized.
 
@@ -87,3 +87,5 @@ This setup enables the Raspberry Pi to act as if it has multiple network interfa
 By using VLANs, you can significantly improve the security and manageability of your network. VLANs allow you to logically segment your network, controlling communication between devices and reducing broadcast traffic. This setup is crucial for maintaining a secure and efficient network, especially in large organizations.
 
 We’ll explore setting up a DHCP server on the Raspberry Pi to assign IP addresses within these VLANs. Stay tuned!
+
+I am recording videos as well :)
