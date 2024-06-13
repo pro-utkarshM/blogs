@@ -1,7 +1,8 @@
-# Utkarsh's Portfolio
-![Website](/public/README/website.png)
+<h1 align="center">Utkarsh's Portfolio</h1>
 
 > Welcome to my personal portfolio website. This site showcases my projects, blog posts, and other professional activities.
+
+![Website](/public/README/website.png)
 
 ## Table of Contents
 
