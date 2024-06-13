@@ -1,6 +1,7 @@
 # Utkarsh's Portfolio
+![Website](/public/README/website.png)
 
-Welcome to my personal portfolio website. This site showcases my projects, blog posts, and other professional activities.
+> Welcome to my personal portfolio website. This site showcases my projects, blog posts, and other professional activities.
 
 ## Table of Contents
 
