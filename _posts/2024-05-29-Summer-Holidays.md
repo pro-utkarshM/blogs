@@ -79,3 +79,26 @@ I don't remember what I did...?
 
 I was with my family... 
 
+> Day 14
+
+I don't know what am I going to do... after a week break...
+
+### Projects to be done:
+1. Compiler
+2. Linux kernel Drivers
+3. LFS files
+4. X-Downloader
+5. myOwnOS
+6. Kernel Carnival
+7. Chess Engine Rust
+8. Project-X
+9. Professional Network Design
+
+### Books to Complete
+1. The art of Hacking
+2. Robert Love
+3. Linux Kernel Primer
+4. Art of linux Kernel Design
+
+
+    
