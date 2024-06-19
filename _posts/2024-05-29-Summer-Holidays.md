@@ -100,5 +100,24 @@ I don't know what am I going to do... after a week break...
 3. Linux Kernel Primer
 4. Art of linux Kernel Design
 
+> Day 20
 
-    
+Startup website
+    Complete home, sunday-school
+    complete accounts
+    find colab/sponsors
+
+Compiler
+    scanner
+    Parser
+    Precedence
+    Assembly
+    Statements
+
+Linux Kernel Drivers
+    Simple Kernel Module
+    Device Numbers and Device Files
+    Create device file in driver and callbacks
+    GPIO Driver
+    Text LCD Driver
+    PWM Module
