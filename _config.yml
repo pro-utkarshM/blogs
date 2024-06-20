@@ -46,6 +46,7 @@ dash:
 
   avatar_source: local
   avatar_path: /public/avatar.jpg
+  # avatar_path: /public/avatar.gif
 
 # Build settings
 theme: jekyll-dash
