@@ -16,6 +16,8 @@ A video series focused on exploring the Linux kernel. In this blog, I am trying 
    sudo apt update
    sudo apt install git build-essential libncurses-dev bison flex libssl-dev libelf-dev
    ```
+   refer [Minimal requirements to compile the Kernel](https://www.kernel.org/doc/html/v4.15/process/changes.html).
+
    This command installs Git, essential compilers, and kernel dependencies like `libncurses`, `bison`, and `libssl`.
 
 2. **Clone the Linux Kernel Source**:
@@ -31,6 +33,9 @@ A video series focused on exploring the Linux kernel. In this blog, I am trying 
    sudo pacman -Syu
    sudo pacman -S git base-devel ncurses bison flex openssl libelf
    ```
+   refer [Minimal requirements to compile the Kernel](https://www.kernel.org/doc/html/v4.15/process/changes.html).
+
+
    This installs `base-devel` (build tools), `ncurses`, and other required libraries.
 
 2. **Clone the Linux Kernel Source**:
