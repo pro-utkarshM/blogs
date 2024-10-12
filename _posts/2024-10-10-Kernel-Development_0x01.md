@@ -8,6 +8,9 @@ tags: linux-kernel opensource codebase reading
 ## Linux Kernel Programming Overview
 A video series focused on exploring the Linux kernel. In this blog, I am trying to guide readers/ viewers through obtaining the kernel source code, setting up a development environment, and compiling the kernel.
 
+<img alt="Procedure" src="/public/media/Kernel-dev-0x01.png">
+
+
 ### 1. **Set up the Environment**
 
 #### For Ubuntu
@@ -81,6 +84,7 @@ This copies your present config to the kernel directory.
    - Once done, save the `.config` file.
 
 ### 3. **Compiling the Kernel**
+<img alt="Procedure" src="/public/media/Kernel-dev-0x02.png">
 
 #### Ubuntu:
 1. Compile the kernel:
@@ -120,6 +124,7 @@ This copies your present config to the kernel directory.
    sudo make modules_install
    sudo make install
    ```
+<img alt="Procedure" src="/public/media/Kernel-dev-0x03.png">
 
 ### 4. **Updating the Bootloader (GRUB)**
 
@@ -146,6 +151,7 @@ After reboot, confirm that the new kernel is running:
 ```bash
 uname -r
 ```
+<img alt="Procedure" src="/public/media/Kernel-dev-0x04.png">
 
 ### 6. **Troubleshooting**
 
