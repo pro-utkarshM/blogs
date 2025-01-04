@@ -5,6 +5,8 @@ email: projects.utkarshMaurya@gmail.com
 description: > # this means to ignore newlines until "show_exerpts:"
   Utkarsh is a software engineer and hobbyist kernel developer currently based in India.  
   He occasionally blogs about software development, startups, and kernel development.
+  
+  Hey, if you'd like to connect, feel free to set up a meeting using the links above!
 show_excerpts: false # set to true to show excerpts on the homepage
 
 paginate: 5
@@ -34,13 +36,16 @@ dash:
     - url: https://linkedin.com/in/utkarsh-maurya-connect
       icon: linkedin
       color: teal
+    - url: https://www.instagram.com/gilfoyle_v2/
+      icon: calendar-alt
+      color: yellow
     - url: https://www.youtube.com/@tss.TheSkillShow
       icon: youtube
       color: red
     - url: https://github.com/pro-utkarshM
       icon: github-square
-      color: purple
-    - url: https://www.instagram.com/gilfoyle_v2/
+      color: white
+    - url: https://www.instagram.com/utkar_sh_/
       icon: instagram
       color: pink
 
