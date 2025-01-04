@@ -15,7 +15,6 @@ Don’t worry if this sounds daunting—it’s a learning journey, and we’ll t
 
 This is my source code [github.com/pro-utkarshM/KEMU](https://github.com/pro-utkarshM/KEMU).
 
----
 
 ## **What Exactly is a Virtual Machine?**
 
@@ -26,7 +25,6 @@ Imagine having a tiny computer… inside your computer! That’s what a VM is. I
 
 Think of it like a retro gaming console you program yourself. How cool is that? 
 
----
 
 ## **Step 1: Setting Up Our VM Playground**
 
@@ -37,7 +35,6 @@ Let’s get the boring-but-essential stuff out of the way:
    - A solid text editor (VSCode, Vim, or even Notepad++ if you're feeling rebellious).
    - GCC for compiling our masterpiece.
 
----
 
 ## **Step 2: Meet the CPU, the Star of Our Show**
 
@@ -53,7 +50,6 @@ typedef struct {
 - **Registers (AX, BX, etc.)**: Think of them as tiny sticky notes for quick calculations.
 - **SP & IP**: These are the navigators. The stack pointer (SP) keeps track of temporary data, and the instruction pointer (IP) tells the CPU what to do next.
 
----
 
 ## **Step 3: Building a Tiny Brain for Memory**
 
@@ -65,8 +61,6 @@ uint8_t memory[MEMORY_SIZE];
 ```
 
 Yes, it’s just a big array, but hey, every great journey starts with a single step, right?
-
----
 
 ## **Step 4: Speaking the VM’s Language**
 
@@ -92,7 +86,6 @@ Let’s say you want to move the number `42` into the `AX` register. Here’s wh
 
 Easy peasy, right?
 
----
 
 ## **Step 5: Making the VM Work**
 
@@ -124,7 +117,6 @@ Here’s the magic:
 
 Boom—your VM is alive!
 
----
 
 ## **Step 6: Let’s Write a Program for Our VM**
 
@@ -155,7 +147,6 @@ Instruction program[] = {
 
 You just wrote a VM program!
 
----
 
 ## **Challenges and Lessons Learned**
 
@@ -166,7 +157,6 @@ Building a VM is no cakewalk, but it’s incredibly rewarding. Here’s what you
 
 But don’t sweat it—it’s all part of the learning process. And trust me, the "aha!" moments make it worth it.
 
----
 
 ## **What’s Next?**
 
@@ -175,7 +165,6 @@ Congrats on building your VM! Now, the sky’s the limit. Here are some ideas to
 - **Create an Assembler**: Write a tool to translate human-readable code into your VM’s bytecode.
 - **Introduce Multithreading**: Why stop at one CPU? Let’s make this baby multitask!
 
----
 
 ## **Final Thoughts**
 
