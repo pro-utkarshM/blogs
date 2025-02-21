@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "I Tried Pinging the GATE Exam Server—Here’s What I Found"
+title:  "Pinging the Exam Server"
 categories: jekyll update
 tags: system-design 
 ---
 
 ### **I Tried Pinging the GATE Exam Server—Here’s What I Found**  
 
-So, picture this: I’m sitting in a TCS iON exam center, just finished my GATE exam, and my brain is running on 5% battery. But instead of walking out like a normal person, I had one last nerd urge—what if I ping the exam server?
+So, picture this: I’m sitting in a TCS iON exam center, just finished my Electronics GATE exam, and my brain is running on 5% battery. But instead of walking out like a normal person, I had one last nerd urge—what if I ping the exam server?
 
-So, I fired up the terminal, ran a quick ping 10.0.0.1, and boom. No response. Server disconnected. 🤯
+So, I had window fired up, ran a quick ping, and boom. No response. Server disconnected. 🤯
 
 Now, this got me thinking—how exactly does this whole exam system work? Why couldn’t I reach the server? And more importantly, how do they lock this system down like Fort Knox? And it got me thinking..
 
@@ -28,6 +28,8 @@ I did some digging, and here’s **everything I uncovered** about the **TCS iON 
 ---
 
 ## **The High-Level System Design (How It All Works)**  
+
+<img alt="HLD" src="/public/media/HLD.png">
 
 If you thought you were just logging in and answering questions, **you’re wrong**. You were actually interacting with a **multi-layered, distributed system** designed to be **unhackable** (almost).  
 
@@ -71,6 +73,8 @@ Imagine the whole exam system as a **movie** with these key players:
 ---
 
 ## **The Low-Level System Design (Nerd Territory) 🚀**  
+
+<img alt="LLD" src="/public/media/LLD.png">
 
 ### **1️⃣ Candidate’s Computer (Locked-Down Exam Machine)**  
 Your exam PC isn’t really **yours**—it’s a **highly restricted machine** designed to do **one thing: run the exam**.  
