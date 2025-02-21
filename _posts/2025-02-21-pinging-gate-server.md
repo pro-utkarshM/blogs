@@ -2,7 +2,7 @@
 layout: post
 title:  "I Tried Pinging the GATE Exam Server—Here’s What I Found"
 categories: jekyll update
-tags: software-dev 
+tags: system-design 
 ---
 
 ### **I Tried Pinging the GATE Exam Server—Here’s What I Found**  
