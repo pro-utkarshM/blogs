@@ -10,7 +10,7 @@ tags: psychology
 ### **General Information**
 
 - **Name:** Utkarsh Maurya  
-- **Email:** [Your Email]  
+- **Email:** projects.utkarshMaurya@gmail.com  
 - **IRC Nickname:** [Your libera.chat nickname]
 
 ---
@@ -19,7 +19,18 @@ tags: psychology
 
 I am a computer science student with a robust background in systems programming and Linux kernel development. My expertise includes kernel module development, memory management, and working with distributed file systems. I have contributed to various open-source projects and am experienced in debugging kernel modules using tools like GDB, ftrace, and perf. I am proficient in C programming and have a thorough understanding of kernel internals and the Linux Virtual File System (VFS).
 
-For this project, I will deepen my understanding of OpenAFS’s cache management, particularly how it interacts with the Linux page cache. I will also study recent kernel changes regarding folios and ensure compatibility across different kernel versions.
+To further strengthen my understanding, I plan to dive deeper into OpenAFS’s cache management subsystem, especially how it interacts with the Linux page cache and memory allocation mechanisms. I will also study recent changes to the folio API in the Linux kernel, particularly multi-page folio support, and ensure compatibility across different kernel versions.
+
+I have worked on several low-level systems projects that demonstrate my skills:
+
+[myOwnOS](https://github.com/pro-utkarshM/myOwnOS): A bare-metal operating system built for Raspberry Pi 3B, where I implemented memory-mapped I/O routines, stack initialization, and startup code using gcc-arm-none-eabi.
+
+[baking-pi-3](https://github.com/pro-utkarshM/baking-pi-3): A reimplementation of the Baking Pi course adapted for Raspberry Pi 3B, covering peripheral control, boot sequence debugging, and interrupt-driven programming.
+
+[Kernel-Carnival](https://github.com/pro-utkarshM/Kernel-Carnival): A toy kernel with user-kernel mode separation, a memory allocator, and custom system calls, which helped me gain insight into syscall handling, memory protection, and userspace integration.
+
+These experiences have provided me with a solid foundation for working on the OpenAFS Linux kernel module and contributing meaningful improvements.
+
 
 ---
 
