@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "GSoC Proposal"
+title:  "GSoC Proposal - OpenAFS with Multi-Page Folio Support"
 categories: jekyll update
-tags: psychology 
+tags: Linux-Kernel opensource gsoc
 ---
 
 ## **Project Proposal: Enhancing OpenAFS with Multi-Page Folio Support**
